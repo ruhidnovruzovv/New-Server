@@ -1752,9 +1752,19 @@ const data = [
     "description": "When the police in a German city are unable to catch a child-murderer, other criminals join in the manhunt."
   }
 ]
-// Bütün məlumatlar üçün endpoint
+
+
 app.get('/data', (req, res) => {
-  res.json(data);
+  const { title } = req.query; // Query parametrləri alırıq
+  if (title) {
+    // Title-ə görə filter tətbiq edirik (kiçik-böyük hərf həssas deyil)
+    const filteredData = data.filter(item =>
+      item.title.toLowerCase().includes(title.toLowerCase())
+    );
+    res.json(filteredData);
+  } else {
+    res.json(data); // Əgər title yoxdursa, bütün məlumatları qaytarırıq
+  }
 });
 
 // ID ilə məlumat üçün endpoint
