@@ -1848,7 +1848,7 @@ app.post("/data", (req, res) => {
     description,
   } = req.body;
 
-  if (!title || !year || !genre) {
+  if (!title || !year || !image) {
     return res.status(400).json({ error: "Lazımi məlumatlar doldurulmalıdır" });
   }
 
